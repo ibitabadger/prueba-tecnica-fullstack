@@ -10,10 +10,10 @@ async function main() {
     create: { id: 'movements_permission', pageName: 'movements' },
   })
 
-  const pEditMovement = await prisma.permission.upsert({
-    where: { id: 'edit_movements_permission' },
+  const pCreateMovement = await prisma.permission.upsert({
+    where: { id: 'create_movements_permission' },
     update: {},
-    create: { id: 'edit_movements_permission', pageName: 'editMovements' },
+    create: { id: 'create_movements_permission', pageName: 'create' },
   })
 
   const pReports = await prisma.permission.upsert({
@@ -35,7 +35,7 @@ async function main() {
       permissions: {
         connect: [
           { id: pMovement.id },
-          { id: pEditMovement.id },
+          { id: pCreateMovement.id },
           { id: pReports.id },
           { id: pUsers.id }
         ]
@@ -47,7 +47,7 @@ async function main() {
       permissions: {
         connect: [
           { id: pMovement.id },
-          { id: pEditMovement.id },
+          { id: pCreateMovement.id },
           { id: pReports.id },
           { id: pUsers.id }
         ]

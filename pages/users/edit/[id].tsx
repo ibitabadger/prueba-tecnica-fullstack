@@ -58,7 +58,7 @@ export default function EditUserPage() {
       });
 
       if (res.ok) {
-        router.push('/users'); // Volver a la pagina que lista de usuarios
+        router.push('/users/users'); // Volver a la pagina que lista de usuarios
       }
     } catch (err) {
       console.error(err);

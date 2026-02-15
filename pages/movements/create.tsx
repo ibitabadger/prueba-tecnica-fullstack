@@ -9,7 +9,7 @@ import { requireAuth } from "@/lib/auth/getSession";
 import { GetServerSideProps } from 'next';
 
 export const getServerSideProps: GetServerSideProps = async (ctx) => {
-  return await requireAuth(ctx, "editMovements");
+  return await requireAuth(ctx, "create");
 };
 
 export default function NewMovementPage() {
@@ -35,7 +35,7 @@ export default function NewMovementPage() {
         })
       });
 
-      if (res.ok) router.push('/movements');
+      if (res.ok) router.push('/movements/movements');
     } catch (err) {
       console.error(err);
     } finally {

@@ -16,8 +16,8 @@ import { authClient } from '@/lib/auth/client';
 
 const mainMenu = [
   { title: "Dashboard", href: "/", icon: LayoutDashboard },
-  { title: "Ingresos y egresos", href: "/movements", icon: ArrowDownUp },
-  { title: "Usuarios", href: "/users", icon: UsersRound },
+  { title: "Ingresos y egresos", href: "/movements/movements", icon: ArrowDownUp },
+  { title: "Usuarios", href: "/users/users", icon: UsersRound },
   { title: "Reportes", href: "/reports", icon: FileText },
 ];
 
@@ -37,14 +37,14 @@ export default function App({ Component, pageProps }: AppProps) {
   //Visualizar partes del sidebar dependiendo del rol del usuario
 
   const baseItems = [
-    { title: "Ingresos y egresos", href: "/movements", icon: ArrowDownUp },
+    { title: "Ingresos y egresos", href: "/movements/movements", icon: ArrowDownUp },
   ];
 
   const adminItems =
     session?.user?.roleId === "admin_role"
       ? [
-          { title: "Usuarios", href: "/users", icon: UsersRound },
-          { title: "Reportes", href: "/reports", icon: FileText },
+          { title: "Usuarios", href: "/users/users", icon: UsersRound },
+          { title: "Reportes", href: "/reports/reports", icon: FileText },
         ]
       : [];
 

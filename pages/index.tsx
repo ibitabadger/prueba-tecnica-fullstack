@@ -24,19 +24,19 @@ export default function Home({ session }: any) {
           <ActionCard 
             title="Ingresos y Egresos" 
             icon={ArrowDownUp} 
-            onClick={() => router.push('/movements')} 
+            onClick={() => router.push('/movements/movements')} 
           />
           {session.user.roleId === "admin_role" && (
             <>
               <ActionCard 
                 title="Gestión de Usuarios" 
                 icon={UsersRound} 
-                onClick={() => router.push('/users')} 
+                onClick={() => router.push('/users/users')} 
               />
               <ActionCard 
                 title="Reportes" 
                 icon={FileText} 
-                onClick={() => router.push('/reports')} 
+                onClick={() => router.push('/reports/reports')} 
               />
             </>
           )}

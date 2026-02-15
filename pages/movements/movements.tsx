@@ -45,7 +45,7 @@ export default function MovementsPage({ session }: any) {
           <div className=" text-right">
           {session.user.roleId === "admin_role" && (
             <Button asChild className="text-xl mt-8">
-              <Link href="/editMovements">
+              <Link href="/movements/create">
                 <Plus className="h-5 w-5" />
                 Nuevo
               </Link>
