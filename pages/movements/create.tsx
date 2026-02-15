@@ -1,9 +1,12 @@
 import { useState } from 'react';
 import { useRouter } from 'next/router';
-import { ChevronLeft, Loader2, Calendar as CalendarIcon } from 'lucide-react';
+import { Loader2 } from 'lucide-react';
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+import { Calendar } from "@/components/ui/calendar"
+import { Field, FieldLabel } from "@/components/ui/field"
+import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover"
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import { requireAuth } from "@/lib/auth/getSession";
 import { GetServerSideProps } from 'next';
@@ -17,7 +20,9 @@ export default function NewMovementPage() {
   const [concept, setConcept] = useState('');
   const [amount, setAmount] = useState('');
   // Inicializar la fecha de hoy en formato YYYY-MM-DD
-  const [date, setDate] = useState(new Date().toISOString().split('T')[0]);
+  const [open, setOpen] = useState(false);
+  const [date, setDate] = useState<Date | undefined>(undefined)
+  //const [date, setDate] = useState(new Date().toISOString().split('T')[0]);
   const [isSubmitting, setIsSubmitting] = useState(false);
 
   const handleSave = async (e: React.FormEvent) => {
@@ -31,7 +36,7 @@ export default function NewMovementPage() {
         body: JSON.stringify({ 
           concept, 
           amount: parseFloat(amount),
-          date: new Date(date).toISOString() // Enviar la fecha en formato ISO
+          date
         })
       });
 
@@ -82,14 +87,40 @@ export default function NewMovementPage() {
                   </div>
 
                   <div className="space-y-2">
-                      <Label htmlFor="date">Fecha del Movimiento</Label>
+                    <Field>
+                      <FieldLabel htmlFor="date">Fecha del Movimiento</FieldLabel>
+                      <Popover open={open} onOpenChange={setOpen}>
+                        <PopoverTrigger asChild>
+                          <Button
+                            variant="outline"
+                            id="date"
+                            className="justify-start font-normal"
+                          >
+                            {date ? date.toLocaleDateString() : "Selecciona fecha"}
+                          </Button>
+                        </PopoverTrigger>
+                        <PopoverContent className="w-auto overflow-hidden p-0" align="start">
+                          <Calendar
+                            mode="single"
+                            selected={date}
+                            defaultMonth={date}
+                            captionLayout="dropdown"
+                            onSelect={(date) => {
+                              setDate(date)
+                              setOpen(false)
+                            }}
+                          />
+                        </PopoverContent>
+                      </Popover>
+    </Field>
+                      {/* <Label htmlFor="date">Fecha del Movimiento</Label>
                       <Input 
                       id="date"
                       type="date"
                       value={date}
                       onChange={(e) => setDate(e.target.value)}
                       required
-                      />
+                      /> */}
                   </div>
               </CardContent>
               

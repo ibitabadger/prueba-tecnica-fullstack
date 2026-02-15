@@ -4,9 +4,9 @@ import { auth } from '@/lib/auth';
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
 
-  const page = parseInt(req.query.page as string) || 1;
-  const limit = 8; //Traer un numero limitado de movimientos para no saturar la interfaz
-  const skip = (page - 1) * limit;
+  // const page = parseInt(req.query.page as string) || 1;
+  // const limit = 8; //Traer un numero limitado de movimientos para no saturar la interfaz
+  // const skip = (page - 1) * limit;
   const session = await auth.api.getSession({ 
     headers: new Headers(req.headers as Record<string, string>) 
   });

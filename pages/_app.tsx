@@ -48,7 +48,8 @@ export default function App({ Component, pageProps }: AppProps) {
         ]
       : [];
 
-const items = [...baseItems, ...adminItems];
+  const items = [...baseItems, ...adminItems];
+
   return (
     <SidebarProvider>
     <div className="flex min-h-screen w-full">

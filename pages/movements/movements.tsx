@@ -5,6 +5,7 @@ import { Button } from "@/components/ui/button";
 import { Loader2 } from 'lucide-react';
 import { requireAuth } from "@/lib/auth/getSession";
 import { Card, CardHeader, CardDescription, CardTitle } from "@/components/ui/card"
+import {Table, TableBody, TableCell, TableFooter, TableHead, TableHeader, TableRow} from "@/components/ui/table"
 import { GetServerSideProps } from "next";
 
 interface Movement {
@@ -55,32 +56,29 @@ export default function MovementsPage({ session }: any) {
           <h1 className="text-2xl font-bold mb-6">Lista de Movimientos</h1>
           
           <div className="overflow-x-auto bg-white rounded-lg shadow">
-            <table className="min-w-full table-auto">
-              <thead className="bg-gray-50 border-b">
-                <tr>
-                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Concepto</th>
-                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Monto</th>
-                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Fecha</th>
-                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Usuario</th>
-                </tr>
-              </thead>
-              <tbody className="divide-y divide-gray-200">
-                {movements.map((m) => (
-                  <tr key={m.id}>
-                    <td className="px-6 py-4 text-sm text-gray-900">{m.concept}</td>
-                    <td className={`px-6 py-4 text-sm font-bold ${m.amount >= 0 ? 'text-green-600' : 'text-red-600'}`}>
-                      ${m.amount.toFixed(2)}
-                    </td>
-                    <td className="px-6 py-4 text-sm text-gray-500">
-                      {new Date(m.date).toLocaleDateString()} 
-                    </td>
-                    <td className="px-6 py-4 text-sm text-gray-600">
-                      {m.user?.name || 'Sistema'}
-                    </td>
-                  </tr>
+            <Table>
+              <TableHeader>
+                <TableRow>
+                  <TableHead>Concepto</TableHead>
+                  <TableHead>Monto</TableHead>
+                  <TableHead>Fecha</TableHead>
+                  <TableHead>Usuario</TableHead>
+                </TableRow>
+              </TableHeader>
+              <TableBody>
+                {movements.slice(0, 6).map((m) => (
+                  <TableRow key={m.id}>
+                    <TableCell>{m.concept}</TableCell>
+                    <TableCell className={`px-6 py-4 text-sm font-bold ${m.amount >= 0 ? 'text-green-600' : 'text-red-600'}`}>${m.amount.toLocaleString('en-US', { minimumFractionDigits: 2 })}</TableCell>
+                    <TableCell>{new Date(m.date).toLocaleDateString()}</TableCell>
+                    <TableCell>{m.user?.name || 'Sistema'}</TableCell>
+                  </TableRow>
                 ))}
-              </tbody>
-            </table>
+              </TableBody>
+              <TableFooter>
+                
+              </TableFooter>
+            </Table>
           </div>
         </div>
 

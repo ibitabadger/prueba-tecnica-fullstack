@@ -1,7 +1,0 @@
-PATCH http://localhost:3000/api/users/NG7AdtMx9BDVpWDCmPAGz2GSD4BvHy0G
-Content-Type: application/json
-
-{
-    "name": "Andrea",
-    "roleId": "admin_role"
-}

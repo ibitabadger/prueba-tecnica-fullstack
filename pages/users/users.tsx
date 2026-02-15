@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react';
 import { Loader2 } from 'lucide-react';
 import { requireAuth } from "@/lib/auth/getSession";
 import { GetServerSideProps } from "next";
+import {Table, TableBody, TableCell, TableFooter, TableHead, TableHeader, TableRow} from "@/components/ui/table"
 
 interface User {
   id: string;
@@ -38,30 +39,33 @@ export default function UsersPage() {
                 <h1 className="text-3xl pb-10 underline">Usuarios</h1>
                 
                 <div className="overflow-x-auto bg-white rounded-lg shadow">
-                    <table className="min-w-full table-auto">
-                    <thead className="bg-gray-50 border-b">
-                        <tr>
-                        <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Nombre</th>
-                        <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Correo</th>
-                        <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Teléfono</th>
-                        <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Acciones</th>
-                        </tr>
-                    </thead>
-                    <tbody className="divide-y divide-gray-200">
-                        {users.map((u) => (
-                        <tr key={u.id}>
-                            <td className="px-6 py-4 text-sm text-gray-900">{u.name}</td>
-                            <td className="px-6 py-4 text-sm font-bold">{u.email}</td>
-                            <td className="px-6 py-4 text-sm text-gray-600">{u.phone}</td>
-                            <td className="px-6 py-4 text-sm text-gray-600">
-                                <Button asChild size="sm" variant="outline">
-                                    <Link href={`/users/edit/${u.id}`}>Editar</Link>
-                                </Button>
-                            </td>
-                        </tr>
-                        ))}
-                    </tbody>
-                    </table>
+                    <Table>
+                        <TableHeader>
+                            <TableRow>
+                            <TableHead>Nombre</TableHead>
+                            <TableHead>Correo</TableHead>
+                            <TableHead>Teléfono</TableHead>
+                            <TableHead>Acciones</TableHead>
+                            </TableRow>
+                        </TableHeader>
+                        <TableBody>
+                            {users.slice(0, 6).map((u) => (
+                            <TableRow key={u.id}>
+                                <TableCell>{u.name}</TableCell>
+                                <TableCell>{u.email}</TableCell>
+                                <TableCell>{u.phone}</TableCell>
+                                <TableCell>
+                                    <Button asChild size="sm" variant="outline">
+                                        <Link href={`/users/edit/${u.id}`}>Editar</Link>
+                                    </Button>
+                                </TableCell>
+                            </TableRow>
+                            ))}
+                        </TableBody>
+                        <TableFooter>
+                            
+                        </TableFooter>
+                        </Table>
                 </div>
             </div>
         </div>
