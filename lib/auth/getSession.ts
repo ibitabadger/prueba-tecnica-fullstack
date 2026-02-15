@@ -1,5 +1,5 @@
 import { auth } from '@/lib/auth';
-import { prisma } from '../prisma';
+import { prisma } from '@/lib/prisma';
 import { GetServerSidePropsContext } from 'next';
 
 export async function requireAuth(
