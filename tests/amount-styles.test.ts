@@ -1,11 +1,10 @@
-
 const getAmountStyles = (amount: number) => {
   return {
     className: amount >= 0 ? 'text-green-600' : 'text-red-600',
-    formatted: new Intl.NumberFormat('en-US', { 
-      style: 'currency', 
-      currency: 'USD' 
-    }).format(amount)
+    formatted: new Intl.NumberFormat('en-US', {
+      style: 'currency',
+      currency: 'USD',
+    }).format(amount),
   };
 };
 

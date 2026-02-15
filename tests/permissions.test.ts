@@ -1,12 +1,15 @@
-
 const hasPermission = (userPermissions: string[], required: string) => {
-  return userPermissions.includes(required) || userPermissions.includes('ADMIN');
+  return (
+    userPermissions.includes(required) || userPermissions.includes('ADMIN')
+  );
 };
 
 describe('Control de Accesos', () => {
   it('debe permitir el acceso si el usuario tiene el permiso específico', () => {
     const permissions = ['movements_permission', 'create_movements_permission'];
-    expect(hasPermission(permissions, 'create_movements_permission')).toBe(true);
+    expect(hasPermission(permissions, 'create_movements_permission')).toBe(
+      true
+    );
   });
 
   it('debe denegar el acceso si el usuario no tiene el permiso', () => {

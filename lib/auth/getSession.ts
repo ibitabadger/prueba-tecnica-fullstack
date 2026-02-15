@@ -1,41 +1,15 @@
-// import { auth } from "@/lib/auth";
+import { auth } from '@/lib/auth';
+import { prisma } from '../prisma';
+import { GetServerSidePropsContext } from 'next';
 
-// export async function requireAuth(ctx: any) {
-//   const session = await auth.api.getSession({
-//     headers: ctx.req.headers,
-//   });
-
-//   if (!session) {
-//     return {
-//       redirect: {
-//         destination: "/login",
-//         permanent: false,
-//       },
-//     };
-//   }
-
-//   return {
-//     props: {
-//         session: JSON.parse(JSON.stringify(session)),
-//     },
-//   };
-// }
-
-
-
-import { auth } from "@/lib/auth";
-import { prisma } from "../prisma";
-import { GetServerSidePropsContext } from "next";
-
-export async function requireAuth(ctx: GetServerSidePropsContext, pageName?: string) {
-  // const session = await auth.api.getSession({
-  //   headers: ctx.req.headers,
-  // });
-
+export async function requireAuth(
+  ctx: GetServerSidePropsContext,
+  pageName?: string
+) {
   const headers = Object.fromEntries(
     Object.entries(ctx.req.headers).map(([key, value]) => [
       key,
-      Array.isArray(value) ? value.join(", ") : value || "",
+      Array.isArray(value) ? value.join(', ') : value || '',
     ])
   );
 
@@ -46,7 +20,7 @@ export async function requireAuth(ctx: GetServerSidePropsContext, pageName?: str
   // Validar autenticación básica
   if (!session) {
     return {
-      redirect: { destination: "/auth/login", permanent: false },
+      redirect: { destination: '/auth/login', permanent: false },
     };
   }
 
@@ -68,7 +42,7 @@ export async function requireAuth(ctx: GetServerSidePropsContext, pageName?: str
 
     if (!hasPermission) {
       return {
-        redirect: { destination: "/unauthorized", permanent: false },
+        redirect: { destination: '/unauthorized', permanent: false },
       };
     }
   }

@@ -1,17 +1,22 @@
 import { NextApiRequest, NextApiResponse } from 'next';
 import { PrismaClient } from '@prisma/client';
-import { auth } from "@/lib/auth"; 
+import { auth } from '@/lib/auth';
 
 const prisma = new PrismaClient();
 
-export default async function handler(req: NextApiRequest, res: NextApiResponse) {
+export default async function handler(
+  req: NextApiRequest,
+  res: NextApiResponse
+) {
   // Verificar autenticación
-  const session = await auth.api.getSession({ 
-    headers: new Headers(req.headers as Record<string, string>) 
+  const session = await auth.api.getSession({
+    headers: new Headers(req.headers as Record<string, string>),
   });
 
   if (!session) {
-    return res.status(401).json({ message: "No autorizado. Debes iniciar sesión." });
+    return res
+      .status(401)
+      .json({ message: 'No autorizado. Debes iniciar sesión.' });
   }
 
   const { id } = req.query;
@@ -22,7 +27,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 
     // Validación básica de entrada
     if (!name && !roleId) {
-      return res.status(400).json({ message: "Faltan campos para actualizar" });
+      return res.status(400).json({ message: 'Faltan campos para actualizar' });
     }
 
     try {
@@ -32,7 +37,9 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
       });
       return res.status(200).json(updatedUser);
     } catch (error) {
-      return res.status(500).json({ message: "No se pudo editar ese usuario específico" });
+      return res
+        .status(500)
+        .json({ message: 'No se pudo editar ese usuario específico' });
     }
   }
 

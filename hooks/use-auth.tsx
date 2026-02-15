@@ -1,7 +1,7 @@
 // hooks/use-auth-actions.ts
 import { authClient } from '@/lib/auth/client';
-import { useRouter } from "next/router";
-import { useState } from "react";
+import { useRouter } from 'next/router';
+import { useState } from 'react';
 
 export function useAuthActions() {
   const router = useRouter();
@@ -12,7 +12,7 @@ export function useAuthActions() {
     await authClient.signOut({
       fetchOptions: {
         onSuccess: () => {
-          router.push("/auth/login");
+          router.push('/auth/login');
         },
       },
     });

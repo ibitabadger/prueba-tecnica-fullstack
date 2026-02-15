@@ -4,10 +4,11 @@ const getFriendlyErrorMessage = (error: any) => {
 };
 
 describe('Utilidades: Manejo de Errores', () => {
-
   it('debe manejar errores de autenticación', () => {
     const error = { status: 401 };
-    expect(getFriendlyErrorMessage(error)).toBe('No autorizado. Debes iniciar sesión.');
+    expect(getFriendlyErrorMessage(error)).toBe(
+      'No autorizado. Debes iniciar sesión.'
+    );
   });
 
   it('debe devolver el mensaje genérico si el error no está tipificado', () => {

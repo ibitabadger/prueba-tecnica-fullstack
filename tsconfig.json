@@ -19,6 +19,12 @@
     },
     "target": "esnext"
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "pages/api/users", "tests"],
+  "include": [
+    "next-env.d.ts",
+    "**/*.ts",
+    "**/*.tsx",
+    "pages/api/users",
+    "tests"
+  ],
   "exclude": ["node_modules"]
 }
