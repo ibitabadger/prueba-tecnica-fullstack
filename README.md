@@ -15,6 +15,7 @@ npm install
 Agregar el archivo .env en la raíz del proyecto compartido por correo.
 
 3. **Sincronización de base de datos**
+
 Generar el cliente de Prisma
 
 ```bash
@@ -27,7 +28,7 @@ npm run dev
 ```
 - La app estará disponible en http://localhost:3000.
 
-#### Test unitarios
+### Test unitarios
 
 Se han implementado pruebas unitarias utilizando Jest para validar la lógica central
 
@@ -41,21 +42,21 @@ Para correr los tests:
 ```bash
 npm test
 ```
-#### Documentación de la API (Swagger)
+### Documentación de la API (Swagger)
 La API está completamente documentada siguiendo el estándar OpenAPI 3.0.
 
   - **Ruta de la documentación:** /api-docs (Interfaz visual de Swagger).
 
   - **Ruta del JSON:** /api/docs.
 
-#### Seguridad y RBAC
+### Seguridad y RBAC
 Se implementó un sistema de Control de Acceso Basado en Roles (RBAC):
 
   - **Protección de Backend:** Las rutas en /api validan la sesión y rechazan conexiones no autenticadas con un error 401.
 
   - **Protección de Frontend:** Se utiliza una función requireAuth en getServerSideProps para validar no solo la sesión, sino también los permisos por página consultando la tabla Permission en la base de datos.
 
-#### Despliegue en Vercel
+### Despliegue en Vercel
 
 El proyecto está optimizado para ser desplegado en Vercel siguiendo estos pasos:
 
