@@ -1,7 +1,6 @@
 import { ShieldAlert, ArrowLeft, Home } from 'lucide-react';
-import { Button } from '@/components/ui/button'; // Asumiendo que usas Shadcn
+import { Button } from '@/components/ui/button';
 import { useRouter } from 'next/router';
-import Link from 'next/link';
 
 export default function UnauthorizedPage() {
   const router = useRouter();
@@ -9,7 +8,7 @@ export default function UnauthorizedPage() {
   return (
     <div className='h-screen w-full flex flex-col items-center justify-center bg-background p-4'>
       <div className='max-w-md w-full text-center space-y-6'>
-        {/* Icono con efecto de alerta */}
+
         <div className='flex justify-center'>
           <div className='bg-destructive/10 p-6 rounded-full animate-pulse'>
             <ShieldAlert className='h-16 w-16 text-destructive' />
@@ -38,7 +37,6 @@ export default function UnauthorizedPage() {
           </Button>
         </div>
 
-        {/* Pie de página sutil */}
         <p className='text-xs text-muted-foreground pt-4'>
           Si crees que esto es un error, contacta al administrador del sistema.
         </p>
