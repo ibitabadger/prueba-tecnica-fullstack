@@ -1,4 +1,5 @@
 import swaggerJSDoc from 'swagger-jsdoc';
+import path from "path";
 
 const options: swaggerJSDoc.Options = {
   definition: {
@@ -9,7 +10,8 @@ const options: swaggerJSDoc.Options = {
       description: 'Documentación de las APIs',
     },
   },
-  apis: ['./pages/api/**/*.ts', './pages/api/**/*.js', "app/api/**/*.ts", "app/api/**/*.js"], // Rutas archivos de API en local y producción
+  apis: [path.join(process.cwd(), "pages/api/**/*.{ts,js}"),
+    path.join(process.cwd(), "app/api/**/*.{ts,js}")], // Rutas archivos de API en local y producción
 };
 
 export const spec = swaggerJSDoc(options);
