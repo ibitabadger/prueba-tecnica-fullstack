@@ -9,7 +9,7 @@ const options: swaggerJSDoc.Options = {
       description: 'Documentación de las APIs',
     },
   },
-  apis: ['./pages/api/**/*.ts'], 
+  apis: ['./pages/api/**/*.ts', "app/api/**/*.ts"], // Rutas archivos de API en local y producción
 };
 
 export const spec = swaggerJSDoc(options);
