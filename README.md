@@ -25,17 +25,17 @@ npx prisma generate
 ```bash
 npm run dev
 ```
-La app estará disponible en http://localhost:3000.
+- La app estará disponible en http://localhost:3000.
 
 #### Test unitarios
 
 Se han implementado pruebas unitarias utilizando Jest para validar la lógica central
 
-**amount-styles:** Valida que en el frontend retorne texto verde para ingresos y texto rojo para egresos
+  - **amount-styles:** Valida que en el frontend retorne texto verde para ingresos y texto rojo para egresos
 
-**error-handling:** Valida manejo de errores y excepciones del backend
+  - **error-handling:** Valida manejo de errores y excepciones del backend
 
-**permissions:** Valida si los controles de accesos de acuerdo al rol fueron implementados correctamente
+  - **permissions:** Valida si los controles de accesos de acuerdo al rol fueron implementados correctamente
 
 Para correr los tests:
 ```bash
@@ -44,16 +44,16 @@ npm test
 #### Documentación de la API (Swagger)
 La API está completamente documentada siguiendo el estándar OpenAPI 3.0.
 
-**Ruta de la documentación:** /api-docs (Interfaz visual de Swagger).
+  - **Ruta de la documentación:** /api-docs (Interfaz visual de Swagger).
 
-**Ruta del JSON:** /api/docs.
+  - **Ruta del JSON:** /api/docs.
 
 #### Seguridad y RBAC
 Se implementó un sistema de Control de Acceso Basado en Roles (RBAC):
 
-**Protección de Backend:** Las rutas en /api validan la sesión y rechazan conexiones no autenticadas con un error 401.
+  - **Protección de Backend:** Las rutas en /api validan la sesión y rechazan conexiones no autenticadas con un error 401.
 
-**Protección de Frontend:** Se utiliza una función requireAuth en getServerSideProps para validar no solo la sesión, sino también los permisos por página consultando la tabla Permission en la base de datos.
+  - **Protección de Frontend:** Se utiliza una función requireAuth en getServerSideProps para validar no solo la sesión, sino también los permisos por página consultando la tabla Permission en la base de datos.
 
 #### Despliegue en Vercel
 
@@ -67,4 +67,4 @@ En la configuración de GitHub OAuth App, añade la URL de callback de producci�
 
 Vercel ejecutará automáticamente npm run build y desplegará la aplicación.
 
-Para este caso, **la aplicación ya se encuentra desplegada: https://prueba-tecnica-fullstack-red.vercel.app/**
+  - Para este caso, **la aplicación ya se encuentra desplegada: https://prueba-tecnica-fullstack-red.vercel.app/**
