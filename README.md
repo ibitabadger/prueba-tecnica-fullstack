@@ -7,7 +7,7 @@
 Ejecutar en consola los siguientes comandos:
 
 ```bash
-git clone [<repositorio-url>](https://github.com/ibitabadger/prueba-tecnica-fullstack.git)
+git clone (https://github.com/ibitabadger/prueba-tecnica-fullstack.git)
 cd prueba-tecnica-fullstack
 npm install
 ```
@@ -18,14 +18,16 @@ Agregar el archivo .env en la raíz del proyecto compartido por correo.
 ```bash
 npm run dev
 ```
-La app estará disponible en [<localhost:3000>]http://localhost:3000.
+La app estará disponible en http://localhost:3000.
 
 #### Test unitarios
 
 Se han implementado pruebas unitarias utilizando Jest para validar la lógica central
 
-*amount-styles: Valida que en el frontend se retorne clase verde para ingresos (positivos) y clase roja para ingresos (negativos)
+*amount-styles: Valida que en el frontend retorne texto verde para ingresos y texto rojo para egresos
+
 *error-handling: Valida manejo de errores y excepciones del backend
+
 *permissions: Valida si los controles de accesos de acuerdo al rol fueron implementados correctamente
 
 Para correr los tests:
@@ -36,6 +38,7 @@ npm test
 La API está completamente documentada siguiendo el estándar OpenAPI 3.0.
 
 Ruta de la documentación: /api-docs (Interfaz visual de Swagger).
+
 Ruta del JSON: /api/docs.
 
 #### Seguridad y RBAC
@@ -51,10 +54,10 @@ El proyecto está optimizado para ser desplegado en Vercel siguiendo estos pasos
 
 Crear un nuevo proyecto en Vercel y conectar el repositorio de GitHub.
 
-Configurar las Environment Variables en el panel de Vercel con valores establecidos en un nuevo OAuth para producción.
+Configurar las Environment Variables en el panel de Vercel con valores establecidos en un nuevo OAuth para producción (se comparte archivo variables-prod por correo).
 
 En la configuración de GitHub OAuth App, añade la URL de callback de producción: https://tu-app.vercel.app/api/auth/callback/github.
 
 Vercel ejecutará automáticamente npm run build y desplegará la aplicación.
 
-Para este caso, la aplicación ya se encuentra desplegada: [<Sistema de gestion>]https://prueba-tecnica-fullstack-red.vercel.app/
+Para este caso, **la aplicación ya se encuentra desplegada: https://prueba-tecnica-fullstack-red.vercel.app/**
