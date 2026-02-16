@@ -14,7 +14,14 @@ npm install
 2. **Variables de entorno**
 Agregar el archivo .env en la raíz del proyecto compartido por correo.
 
-3. **Ejecutar aplicación**
+3. **Sincronización de base de datos**
+Generar el cliente de Prisma
+
+```bash
+npx prisma generate
+```
+
+4. **Ejecutar aplicación**
 ```bash
 npm run dev
 ```
@@ -24,11 +31,11 @@ La app estará disponible en http://localhost:3000.
 
 Se han implementado pruebas unitarias utilizando Jest para validar la lógica central
 
-*amount-styles: Valida que en el frontend retorne texto verde para ingresos y texto rojo para egresos
+**amount-styles:** Valida que en el frontend retorne texto verde para ingresos y texto rojo para egresos
 
-*error-handling: Valida manejo de errores y excepciones del backend
+**error-handling:** Valida manejo de errores y excepciones del backend
 
-*permissions: Valida si los controles de accesos de acuerdo al rol fueron implementados correctamente
+**permissions:** Valida si los controles de accesos de acuerdo al rol fueron implementados correctamente
 
 Para correr los tests:
 ```bash
@@ -37,16 +44,16 @@ npm test
 #### Documentación de la API (Swagger)
 La API está completamente documentada siguiendo el estándar OpenAPI 3.0.
 
-Ruta de la documentación: /api-docs (Interfaz visual de Swagger).
+**Ruta de la documentación:** /api-docs (Interfaz visual de Swagger).
 
-Ruta del JSON: /api/docs.
+**Ruta del JSON:** /api/docs.
 
 #### Seguridad y RBAC
 Se implementó un sistema de Control de Acceso Basado en Roles (RBAC):
 
-Protección de Backend: Las rutas en /api validan la sesión y rechazan conexiones no autenticadas con un error 401.
+**Protección de Backend:** Las rutas en /api validan la sesión y rechazan conexiones no autenticadas con un error 401.
 
-Protección de Frontend: Se utiliza una función requireAuth en getServerSideProps para validar no solo la sesión, sino también los permisos por página consultando la tabla Permission en la base de datos.
+**Protección de Frontend:** Se utiliza una función requireAuth en getServerSideProps para validar no solo la sesión, sino también los permisos por página consultando la tabla Permission en la base de datos.
 
 #### Despliegue en Vercel
 
