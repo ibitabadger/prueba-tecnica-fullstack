@@ -2,6 +2,60 @@ import type { NextApiRequest, NextApiResponse } from 'next';
 import { prisma } from '../../../lib/prisma';
 import { auth } from '@/lib/auth';
 
+/**
+ * @swagger
+ * /api/movements/movement:
+ *   get:
+ *     summary: Obtener movimientos de ingresos y egresos de cualquier usuario
+ *     responses:
+ *       200:
+ *         description: Lista cargada con éxito.
+ *         content:
+ *           application/json:
+ *            example:
+ *             id: 10
+ *             concept: Compra supermercado
+ *             amount: 85000
+ *             date: 2025-02-15T10:30:00.000Z
+ *             userId: NG7AdtMx9BDVpWDCmPAGz2GSD4BvHy0M
+ *             createdAt: 2025-02-10T14:48:00.000Z
+ *             updatedAt: 2025-02-10T14:48:00.000Z
+ *       401:
+ *         description: No autorizado. Debes iniciar sesión.
+ *       500:
+ *         description: Error interno del servidor.
+ *   post:
+ *     summary: Crear un movimiento de ingreso o egreso
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           example:
+ *             concept: Compra supermercado
+ *             amount: 85000
+ *             date: 2025-02-15T10:30:00.000Z
+ *     responses:
+ *       201:
+ *         description: Movimiento creado correctamente.
+ *         content:
+ *           application/json:
+ *             example:
+ *               id: 10
+ *               concept: Compra supermercado
+ *               amount: 85000
+ *               date: 2025-02-15T10:30:00.000Z
+ *               userId: 3
+ *               createdAt: 2025-02-10T14:48:00.000Z
+ *               updatedAt: 2025-02-10T14:48:00.000Z
+ *       400:
+ *         description: Datos inválidos.
+ *       401:
+ *         description: No autorizado.
+ *       405:
+ *         description: Método no permitido.
+ *       500:
+ *         description: Error interno del servidor.
+ */
 export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse
@@ -65,7 +119,7 @@ export default async function handler(
       },
     });
 
-    //Respuesta exitosa
+    // Respuesta exitosa
     return res.status(201).json(newMovement);
   } catch (error) {
     console.error('Error en API Movement:', error);

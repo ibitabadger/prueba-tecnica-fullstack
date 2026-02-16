@@ -27,7 +27,13 @@ export async function requireAuth(
   // Validar permisos por RoleId
   if (pageName) {
     // Obtener el roleId de la sesión
-    const userRoleId = session.user.roleId;
+    const userRoleId = session.user?.roleId;
+
+    if (!userRoleId) {
+      return {
+        redirect: { destination: "/auth/login", permanent: false },
+      };
+    }
 
     const hasPermission = await prisma.permission.findFirst({
       where: {

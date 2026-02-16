@@ -3,23 +3,9 @@ import type { AppProps } from 'next/app';
 import { SidebarProvider } from '@/components/ui/sidebar';
 import { useRouter } from 'next/router';
 import { AppSidebar } from '@/components/AppSidebar';
-import {
-  LayoutDashboard,
-  ArrowDownUp,
-  UsersRound,
-  FileText,
-} from 'lucide-react';
+import { ArrowDownUp, UsersRound, FileText } from 'lucide-react';
+import { Toaster } from 'sonner';
 
-const mainMenu = [
-  { title: 'Dashboard', href: '/', icon: LayoutDashboard },
-  {
-    title: 'Ingresos y egresos',
-    href: '/movements/movements',
-    icon: ArrowDownUp,
-  },
-  { title: 'Usuarios', href: '/users/users', icon: UsersRound },
-  { title: 'Reportes', href: '/reports', icon: FileText },
-];
 
 export default function App({ Component, pageProps }: AppProps) {
   const router = useRouter();
@@ -27,9 +13,10 @@ export default function App({ Component, pageProps }: AppProps) {
 
   // Definir ruta que no lleva sidebar
   const isLoginPage = router.pathname === '/auth/login';
+  const isApiPage = router.pathname === '/api-docs';
 
-  //Si es login, retornar la página "limpia"
-  if (isLoginPage) {
+  //Si es login o api docs, retornar la página "limpia"
+  if (isLoginPage || isApiPage) {
     return <Component {...pageProps} />;
   }
 
@@ -61,10 +48,11 @@ export default function App({ Component, pageProps }: AppProps) {
 
         <main className='flex-1 p-8'>
           <div className='mb-8'>
-            <h1 className='text-4xl justify-self-center mb-4'>
+            <h1 className='text-4xl justify-self-center mb-4 scroll-m-20 border-b pb-2 text-3xl font-semibold tracking-tight first:mt-0'>
               Sistema de gestión de ingresos y gastos
             </h1>
           </div>
+          <Toaster richColors />
           <Component {...pageProps} />
         </main>
       </div>

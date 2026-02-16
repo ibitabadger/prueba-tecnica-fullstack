@@ -4,6 +4,51 @@ import { auth } from '@/lib/auth';
 
 const prisma = new PrismaClient();
 
+
+/**
+ * @swagger
+ * /api/users/{id}:
+ *   patch:
+ *     summary: Actualizar parcialmente un usuario
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         required: true
+ *         description: ID del usuario a actualizar
+ *         schema:
+ *           type: string
+ *           example: clx123
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           example:
+ *             name: Andrea
+ *             roleId: admin_role
+ *     responses:
+ *       200:
+ *         description: Usuario actualizado correctamente.
+ *         content:
+ *           application/json:
+ *             example:
+ *               id: clx123
+ *               name: Andrea
+ *               email: andrea.sanchezc@udea.edu.co
+ *               emailVerified: true
+ *               image: https://avatars.githubusercontent.com/u/126259117?v=4
+ *               phone: null
+ *               roleId: admin_role
+ *               createdAt: 2026-02-15T20:57:17.209Z
+ *               updatedAt: 2026-02-15T20:57:17.209Z
+ *       400:
+ *         description: Datos inválidos.
+ *       401:
+ *         description: No autorizado.
+ *       405:
+ *         description: Método no permitido.
+ *       500:
+ *         description: Error interno del servidor.
+ */
 export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse
@@ -29,7 +74,7 @@ export default async function handler(
     if (!name && !roleId) {
       return res.status(400).json({ message: 'Faltan campos para actualizar' });
     }
-
+    
     try {
       const updatedUser = await prisma.user.update({
         where: { id: String(id) },

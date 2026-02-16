@@ -51,7 +51,7 @@ export function AppSidebar({ menuItems }: AppSidebarProps) {
                 <SidebarMenuButton asChild>
                   <a
                     href={item.href}
-                    className='text-zinc-400 hover:text-[#fafafa]'
+                    className='text-zinc-400 hover:text-[#FFFFFF]'
                   >
                     <item.icon className='mr-2 h-5 w-5' />
                     <span className='font-bold text-lg'>{item.title}</span>

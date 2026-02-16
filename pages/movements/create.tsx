@@ -6,21 +6,13 @@ import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Calendar } from '@/components/ui/calendar';
 import { Field, FieldLabel } from '@/components/ui/field';
-import {
-  Popover,
-  PopoverContent,
-  PopoverTrigger,
-} from '@/components/ui/popover';
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardFooter,
-  CardHeader,
-  CardTitle,
-} from '@/components/ui/card';
+import Link from 'next/link';
+import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover';
+import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
+import { toast } from "sonner";
 import { requireAuth } from '@/lib/auth/getSession';
 import { GetServerSideProps } from 'next';
+
 
 export const getServerSideProps: GetServerSideProps = async (ctx) => {
   return await requireAuth(ctx, 'create');
@@ -30,10 +22,8 @@ export default function NewMovementPage() {
   const router = useRouter();
   const [concept, setConcept] = useState('');
   const [amount, setAmount] = useState('');
-  // Inicializar la fecha de hoy en formato YYYY-MM-DD
   const [open, setOpen] = useState(false);
   const [date, setDate] = useState<Date | undefined>(undefined);
-  //const [date, setDate] = useState(new Date().toISOString().split('T')[0]);
   const [isSubmitting, setIsSubmitting] = useState(false);
 
   const handleSave = async (e: React.FormEvent) => {
@@ -51,7 +41,12 @@ export default function NewMovementPage() {
         }),
       });
 
-      if (res.ok) router.push('/movements/movements');
+      if (res.ok){
+        toast.success("Registro Creado Correctamente.");
+        router.push('/movements/movements');
+      } else {
+        toast.error("Error creando el registro.");
+      }
     } catch (err) {
       console.error(err);
     } finally {
@@ -61,7 +56,7 @@ export default function NewMovementPage() {
 
   return (
     <div className='mb-8'>
-      <h1 className='text-3xl pb-10 underline'>Ingresos y Egresos</h1>
+      <Link href='/movements/movements'><h1 className='text-2xl text-left underline underline-offset-[12px] pb-10'>Ingresos y Egresos</h1></Link>
       <div className='flex flex-col items-center p-8'>
         <div className='w-full max-w-lg space-y-4'>
           <Card className='shadow-lg'>
@@ -128,36 +123,27 @@ export default function NewMovementPage() {
                       </PopoverContent>
                     </Popover>
                   </Field>
-                  {/* <Label htmlFor="date">Fecha del Movimiento</Label>
-                      <Input 
-                      id="date"
-                      type="date"
-                      value={date}
-                      onChange={(e) => setDate(e.target.value)}
-                      required
-                      /> */}
                 </div>
               </CardContent>
 
               <CardFooter>
+                <Button
+                  type='button'
+                  variant='outline'
+                  className='w-full mr-2'
+                  onClick={() => router.back()}
+                >
+                  Cancelar
+                </Button>
                 <Button
                   type='submit'
                   className='w-full mr-4'
                   disabled={isSubmitting}
                 >
                   {isSubmitting && (
-                    <Loader2 className='mr-2 h-4 w-4 animate-spin' />
+                    <Loader2 className='h-4 w-4 animate-spin' />
                   )}
                   {isSubmitting ? 'Guardando...' : 'Confirmar Registro'}
-                </Button>
-
-                <Button
-                  type='button'
-                  variant='outline'
-                  className='w-full'
-                  onClick={() => router.back()}
-                >
-                  Cancelar
                 </Button>
               </CardFooter>
             </form>

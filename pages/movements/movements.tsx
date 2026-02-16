@@ -58,7 +58,7 @@ export default function MovementsPage({ session }: any) {
   return (
     <div className='mb-8'>
       <div className='p-8'>
-        <h1 className='text-3xl underline mb-4'>Ingresos y egresos</h1>
+        <h1 className='text-2xl text-left underline underline-offset-[12px] pb-10'>Ingresos y egresos</h1>
         <div className=' text-right'>
           {session.user.roleId === 'admin_role' && (
             <Button asChild className='text-xl mt-8'>

@@ -4,15 +4,7 @@ import { useEffect, useState } from 'react';
 import { Loader2 } from 'lucide-react';
 import { requireAuth } from '@/lib/auth/getSession';
 import { GetServerSideProps } from 'next';
-import {
-  Table,
-  TableBody,
-  TableCell,
-  TableFooter,
-  TableHead,
-  TableHeader,
-  TableRow,
-} from '@/components/ui/table';
+import { Table, TableBody, TableCell, TableFooter, TableHead, TableHeader, TableRow } from '@/components/ui/table';
 
 interface User {
   id: string;
@@ -48,7 +40,7 @@ export default function UsersPage() {
   return (
     <div className='mb-8'>
       <div className='p-8'>
-        <h1 className='text-3xl pb-10 underline'>Usuarios</h1>
+        <h1 className='text-2xl text-left underline underline-offset-[12px] pb-10'>Usuarios</h1>
 
         <div className='overflow-x-auto bg-white rounded-lg shadow'>
           <Table>

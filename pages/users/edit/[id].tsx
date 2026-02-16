@@ -1,24 +1,13 @@
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/router';
-import { ChevronLeft, Loader2, User } from 'lucide-react';
+import { Loader2 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardFooter,
-  CardHeader,
-  CardTitle,
-} from '@/components/ui/card';
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from '@/components/ui/select';
+import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle} from '@/components/ui/card';
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
+import Link from 'next/link';
+import { toast } from "sonner";
 import { requireAuth } from '@/lib/auth/getSession';
 import { GetServerSideProps } from 'next';
 
@@ -46,7 +35,7 @@ export default function EditUserPage() {
         if (res.ok) {
           setName(data.name);
           setRoleId(data.roleId);
-        }
+        } 
       } catch (err) {
         console.error('Error cargando usuario:', err);
       } finally {
@@ -69,7 +58,10 @@ export default function EditUserPage() {
       });
 
       if (res.ok) {
+        toast.success("Usuario editado correctamente.");
         router.push('/users/users'); // Volver a la pagina que lista de usuarios
+      } else {
+          toast.error("Error creando el registro.");
       }
     } catch (err) {
       console.error(err);
@@ -88,7 +80,9 @@ export default function EditUserPage() {
 
   return (
     <div className='mb-8'>
-      <h1 className='text-3xl pb-10 underline'>Usuarios</h1>
+      <Link href='/users/users'>
+        <h1 className='text-2xl text-left underline underline-offset-[12px] pb-10'>Usuarios</h1>
+      </Link>
       <div className='flex flex-col items-center p-8'>
         <div className='w-full max-w-lg space-y-4'>
           <Card className='shadow-lg'>
@@ -130,23 +124,22 @@ export default function EditUserPage() {
 
               <CardFooter>
                 <Button
+                  type='button'
+                  variant='outline'
+                  className='w-full mr-2'
+                  onClick={() => router.back()}
+                >
+                  Cancelar
+                </Button>
+                <Button
                   type='submit'
                   className='w-full mr-2'
                   disabled={isSubmitting}
                 >
                   {isSubmitting && (
-                    <Loader2 className='mr-2 h-4 w-4 animate-spin' />
+                    <Loader2 className='h-4 w-4 animate-spin' />
                   )}
                   {isSubmitting ? 'Guardando...' : 'Actualizar Usuario'}
-                </Button>
-
-                <Button
-                  type='button'
-                  variant='outline'
-                  className='w-full'
-                  onClick={() => router.back()}
-                >
-                  Cancelar
                 </Button>
               </CardFooter>
             </form>

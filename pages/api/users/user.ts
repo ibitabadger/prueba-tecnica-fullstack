@@ -4,6 +4,26 @@ import { auth } from '@/lib/auth';
 
 const prisma = new PrismaClient();
 
+/**
+ * @swagger
+ * /api/users/user:
+ *   get:
+ *     summary: Obtener lista de usuarios
+ *     responses:
+ *       200:
+ *         description: Lista cargada con éxito.
+ *         content:
+ *           application/json:
+ *            example:
+ *             id: NG7AdtMx9BDVpWDCmPAGz2GSD4BvHy0M
+ *             name: Juan Pérez
+ *             email: juan.perez@example.com
+ *             phone: 1234567890
+ *       401:
+ *         description: No autorizado. Debes iniciar sesión.
+ *       500:
+ *         description: Error interno del servidor.
+ */
 export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse
@@ -12,12 +32,6 @@ export default async function handler(
   const session = await auth.api.getSession({
     headers: new Headers(req.headers as Record<string, string>),
   });
-
-  if (!session) {
-    return res
-      .status(401)
-      .json({ message: 'No autorizado. Debes iniciar sesión.' });
-  }
 
   // Manejar el método GET para listar los usuarios
   if (req.method === 'GET') {

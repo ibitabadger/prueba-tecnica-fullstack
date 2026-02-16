@@ -4,6 +4,24 @@ import { auth } from '@/lib/auth';
 
 const prisma = new PrismaClient();
 
+/**
+ * @swagger
+ * /api/movements/report:
+ *   get:
+ *     summary: Obtener movimientos de ingresos y egresos (logica separada para el reporte)
+ *     responses:
+ *       200:
+ *         description: Lista cargada con éxito.
+ *         content:
+ *           application/json:
+ *            example:
+ *             date: 13 feb
+ *             total: 8500
+ *       401:
+ *         description: No autorizado. Debes iniciar sesión.
+ *       500:
+ *         description: Error interno del servidor.
+ */
 export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse
